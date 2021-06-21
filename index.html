@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Redirection en cours...</title>
+	<meta name="robots" content="noindex nofollow">
+	<style type="text/css">
+	* {
+		font-family: Segoe UI;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		outline: 0;
+	}
+	body {
+		color: #EEE;
+	}
+	#false {
+		background-color: #291616;
+	}
+	.false {
+		position: fixed;
+		font-size: 20px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	#true {
+		background-color: #0D1117;
+	}
+	.true {
+		position: fixed;
+		font-size: 20px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	</style>
+</head>
+<body id="true">
+	<div class="true">
+		<p>Vous allez être rediriger vers <span id="link">{{ link }}</span> dans <span id="seconds">{{ seconds }}</span> secondes.</p>
+	</div>
+<script type="text/javascript">
+	var link = 'https://github.com/r0leplay';
+	var seconds = 5;
+	var foo;
+	var default_seconds = seconds;
+
+	function defaultValues() {
+		document.getElementById("link").innerHTML = link;
+		document.getElementById("seconds").innerHTML = default_seconds;
+	}
+
+	function redirect() {
+		document.location.href = link;
+	}
+
+	function updateSecs() {
+		document.getElementById("seconds").innerHTML = seconds;
+		seconds--;
+		if (seconds == -1) {
+		    clearInterval(foo);
+		    redirect();
+		}
+	}
+
+	function countdownTimer() {
+		foo = setInterval(function () {
+		    updateSecs()
+		}, 1000);
+	}
+
+	defaultValues();
+	countdownTimer();
+</script>
+</body>
+</html>
